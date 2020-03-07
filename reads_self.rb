@@ -1,1 +1,1 @@
-puts File.read("reads_self.rb")
+puts File.read(__FILE__)
