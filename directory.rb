@@ -1,17 +1,17 @@
 # Array of students
-students = [
-  { name: 'Dr. Hannibal Lecter', cohort: :november },
-  { name: 'Darth Vader', cohort: :november },
-  { name: 'Nurse Ratched', cohort: :november },
-  { name: 'Michael Corleone', cohort: :november },
-  { name: 'Alex DeLarge', cohort: :november },
-  { name: 'The Wicked Witch of the West', cohort: :november },
-  { name: 'Terminator', cohort: :november },
-  { name: 'Freddy Krueger', cohort: :november },
-  { name: 'The Joker', cohort: :november },
-  { name: 'Joffrey Baratheon', cohort: :november },
-  { name: 'Norman Bates', cohort: :november }
-]
+# students = [
+#   { name: 'Dr. Hannibal Lecter', cohort: :november },
+#   { name: 'Darth Vader', cohort: :november },
+#   { name: 'Nurse Ratched', cohort: :november },
+#   { name: 'Michael Corleone', cohort: :november },
+#   { name: 'Alex DeLarge', cohort: :november },
+#   { name: 'The Wicked Witch of the West', cohort: :november },
+#   { name: 'Terminator', cohort: :november },
+#   { name: 'Freddy Krueger', cohort: :november },
+#   { name: 'The Joker', cohort: :november },
+#   { name: 'Joffrey Baratheon', cohort: :november },
+#   { name: 'Norman Bates', cohort: :november }
+# ]
 
 # print out a header for the list
 def print_header
@@ -99,48 +99,35 @@ def input_students
     # ask for cohort
     puts "#{name}'s cohort, default is January"
     cohort = ""
-    loop do
+    while cohort = "" do
       input = gets.chomp.downcase
       case input
       when ""
         cohort = :january
-        break
       when "january"
         cohort = :january
-        break
       when "february"
         cohort = :february
-        break
       when "march"
         cohort = :march
-        break
       when "april"
         cohort = :april
-        break
       when "may"
         cohort = :may
-        break
       when "june"
         cohort = :june
-        break
       when "july"
         cohort = :july
-        break
       when "august"
         cohort = :august
-        break
       when "septepmer"
         cohort = :september
-        break
       when "october"
         cohort = :october
-        break
       when "november"
         cohort = :november
-        break
       when "december"
         cohort = :december
-        break
       else
         puts "Month has typo, try again"
       end
@@ -164,7 +151,7 @@ def input_students
       # birth_country: birth_country
     }
     puts "Now we have #{students.length} #{students.length == 1 ? 'student' : 'students'}"
-    # get next name, if user enters empty string, loop breaks.
+    # get next name, if user enters empty string, s.
     name = gets.gsub(/\n/, "")
   end
   # return students array implicitly
@@ -195,6 +182,7 @@ def interactive_menu
     end
   end
 end
+
 
 
 =begin 
