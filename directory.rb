@@ -67,9 +67,7 @@ def show_students
   end
 end
 
-def save_students
-  puts 'Which file to save to?'
-  target = STDIN.gets.chomp
+def save_students(target = 'students.csv')
   file = File.open(target, 'w')
   # iterate through students
   @students.each do |student|
@@ -94,6 +92,7 @@ end
 def try_load_students
   filename = ARGV.first
   if filename.nil?
+    puts "Attempting to load default file: students.csv"
     filename = 'students.csv'
   end
   if File.exist?(filename)
@@ -138,9 +137,11 @@ def process(selection)
   when '2'
     show_students
   when '3'
-    save_students
+    puts 'File to save to? Default: students.csv'
+    save_students(STDIN.gets.chomp)
   when '4'
-    load_students
+    puts 'File to load from? Default: students.csv'
+    load_students(STDIN.gets.chomp)
   when '5'
     clear_students
   when '9'
