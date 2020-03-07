@@ -32,7 +32,7 @@ def input_students
     while cohort == '' do
       input = STDIN.gets.chomp.downcase
       if months.include?(input)
-        cohort = input.to_sym
+        cohort = input
       elsif input == ''
         cohort = :january
       else
@@ -41,11 +41,15 @@ def input_students
     end
 
     # push data as hash to the student array
-    @students << { name: name, cohort: cohort }
+    add_student
     puts "Now we have #{@students.length} #{@students.length == 1 ? 'student' : 'students'}"
     # get next name, if user enters empty string, s.
     name = STDIN.gets.chomp
   end
+end
+
+def add_student
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def print_menu
@@ -95,7 +99,7 @@ def load_students(filename = 'students.csv')
   file = File.open(filename, 'r')
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_student
   end
   file.close
 end
