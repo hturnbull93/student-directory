@@ -18,16 +18,33 @@ def print_header
   puts 'The students of Villains Academy'
   puts '-------------'
 end
-# print out the students list 
+
+# print out the students list
 def print(students)
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
+
+# print out students with a certain initial given by user
+def print_by_initial(students)
+  puts 'Which initial would you like list of?'
+  initial = gets.chomp
+  count = 0
+  students.each_with_index do |student, index|
+    if student[:name][0].downcase == initial.downcase
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      count += 1
+    end
+  end
+  puts "There are #{count} students with the initial '#{initial}'"
+end
+
 # print out a footer with the number of students
 def print_footer(names)
   puts "Overall, we have #{names.length} great students"
 end
+
 # get student names from user
 def input_students
   puts 'Please enter the names of the students'
@@ -43,11 +60,12 @@ def input_students
     # get another name, if user presses enter with no input name is empty, so loop breaks.
     name = gets.chomp
   end
-  #return students array implicitly
+  # return students array implicitly
   students
 end
 
 students = input_students
 print_header
 print(students)
+print_by_initial(students)
 print_footer(students)
