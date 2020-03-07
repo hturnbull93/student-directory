@@ -76,11 +76,11 @@ def save_students
     input = STDIN.gets.chomp
     if input == 'Y'
       write_students(target)
-      puts "Students saved to #{target}"
     else
       puts 'Save aborted'
     end
-  end
+  else
+    write_students(target)
 end
 
 def write_students(target)
@@ -92,6 +92,7 @@ def write_students(target)
       file.write "#{csv_line}\n"
     end
   end
+  puts "Students saved to #{target}"
 end
 
 def load_students(filename = 'students.csv')
