@@ -120,7 +120,6 @@ def load_students
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
-  end
 end
 
 def interactive_menu
