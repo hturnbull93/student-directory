@@ -63,6 +63,9 @@ def print_under_12(students)
   puts "There are #{count} students with names less than 12 characters"
 end
 
+# print students by cohort
+def print_by_cohort
+
 # print out a footer with the number of students
 def print_footer(names)
   puts "Overall, we have #{names.length} great students"
@@ -77,6 +80,55 @@ def input_students
   # get a name
   name = gets.chomp
   while !name.empty? do
+    # ask for cohort
+    puts "#{name}'s cohort, default is January"
+    cohort = ""
+    loop do
+      input = gets.chomp.downcase
+      case input
+      when ""
+        cohort = :january
+        break
+      when "january"
+        cohort = :january
+        break
+      when "february"
+        cohort = :february
+        break
+      when "march"
+        cohort = :march
+        break
+      when "april"
+        cohort = :april
+        break
+      when "may"
+        cohort = :may
+        break
+      when "june"
+        cohort = :june
+        break
+      when "july"
+        cohort = :july
+        break
+      when "august"
+        cohort = :august
+        break
+      when "septepmer"
+        cohort = :september
+        break
+      when "october"
+        cohort = :october
+        break
+      when "november"
+        cohort = :november
+        break
+      when "december"
+        cohort = :december
+        break
+      else
+        puts "Month has typo, try again"
+      end
+    end
     # ask for hobbies
     puts "#{name}'s hobbies, comma separated"
     hobbies = gets.chomp.split(", ")
@@ -88,9 +140,9 @@ def input_students
     birth_country = gets.chomp
     # push data as hash to the student array
     students << { 
-      name: name, 
-      cohort: :november, 
-      hobbies: hobbies, 
+      name: name,
+      cohort: cohort,
+      hobbies: hobbies,
       height: height,
       birth_country: birth_country
     }
