@@ -22,8 +22,17 @@ end
 # print out the students list
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. #{student[:name]}"
+    print_student_data(student)
   end
+end
+
+# print out a student's data
+def print_student_data(student)
+  puts " - Cohort: #{student[:cohort]}"
+  puts " - Hobbies: #{student[:hobbies].join(", ")}"
+  puts " - Height: #{student[:height]}cm"
+  puts " - Country of birth: #{student[:birth_country]}"
 end
 
 # print out students with a certain initial given by user
@@ -33,7 +42,8 @@ def print_by_initial(students)
   count = 0
   students.each_with_index do |student, index|
     if student[:name][0].downcase == initial.downcase
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      puts "#{index + 1}. #{student[:name]}"
+      print_student_data(student)
       count += 1
     end
   end
@@ -45,7 +55,8 @@ def print_under_12(students)
   count = 0
   students.each_with_index do |student, index|
     if student[:name].length < 12
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      puts "#{index + 1}. #{student[:name]}"
+      print_student_data(student)
       count += 1
     end
   end
@@ -66,8 +77,23 @@ def input_students
   # get a name
   name = gets.chomp
   while !name.empty? do
-    # push that name as part of a hash to the student array
-    students << { name: name, cohort: :november }
+    # ask for hobbies
+    puts "#{name}'s hobbies, comma separated"
+    hobbies = gets.chomp.split(", ")
+    # ask for height
+    puts "#{name}'s height in cm"
+    height = gets.chomp.to_i
+    # ask for country of birth
+    puts "#{name}'s country of birth"
+    birth_country = gets.chomp
+    # push data as hash to the student array
+    students << { 
+      name: name, 
+      cohort: :november, 
+      hobbies: hobbies, 
+      height: height,
+      birth_country: birth_country
+    }
     puts "Now we have #{students.length} students"
     # get another name, if user presses enter with no input name is empty, so loop breaks.
     name = gets.chomp
@@ -79,6 +105,6 @@ end
 students = input_students
 print_header
 print(students)
-print_by_initial(students)
-print_under_12(students)
+# print_by_initial(students)
+# print_under_12(students)
 print_footer(students)
