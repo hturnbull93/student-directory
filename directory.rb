@@ -83,6 +83,7 @@ def save_students
 end
 
 def load_students(filename = 'students.csv')
+  filename = 'students.csv' if filename == ''
   if File.exist?(filename)
     file = File.open(filename, 'r')
     file.readlines.each do |line|
