@@ -1,0 +1,1 @@
+puts File.read("reads_self.rb")
