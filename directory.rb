@@ -78,9 +78,7 @@ end
 
 students = input_students
 print_header
-# print(students)
-# print_by_initial(students)
-# print_under_12(students)
-# print_while(students)
-print_by_initial_while(students)
+print(students)
+print_by_initial(students)
+print_under_12(students)
 print_footer(students)
