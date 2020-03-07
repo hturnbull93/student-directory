@@ -172,9 +172,13 @@ def input_students
 end
 
 students = input_students
-print_header
-# print(students)
-# print_by_initial(students)
-print_under_12(students)
-# print_by_cohort(students)
-print_footer(students)
+if students.length > 0
+  print_header
+  # print(students)
+  # print_by_initial(students)
+  print_under_12(students)
+  # print_by_cohort(students)
+  print_footer(students)
+else
+  puts "No students at Villains Academy"
+end
