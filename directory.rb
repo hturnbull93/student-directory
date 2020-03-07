@@ -29,10 +29,10 @@ end
 
 # print out a student's data
 def print_student_data(student)
-  puts " - Cohort: #{student[:cohort]}"
-  puts " - Hobbies: #{student[:hobbies].join(", ")}"
-  puts " - Height: #{student[:height]}cm"
-  puts " - Country of birth: #{student[:birth_country]}"
+  puts "   - Cohort: #{student[:cohort]}"
+  # puts "   - Hobbies: #{student[:hobbies].join(", ")}"
+  # puts "   - Height: #{student[:height]}cm"
+  # puts "   - Country of birth: #{student[:birth_country]}"
 end
 
 # print out students with a certain initial given by user
@@ -145,24 +145,25 @@ def input_students
         puts "Month has typo, try again"
       end
     end
-    # ask for hobbies
-    puts "#{name}'s hobbies, comma separated"
-    hobbies = gets.chomp.split(", ")
-    # ask for height
-    puts "#{name}'s height in cm"
-    height = gets.chomp.to_i
-    # ask for country of birth
-    puts "#{name}'s country of birth"
-    birth_country = gets.chomp
+    # # ask for hobbies
+    # puts "#{name}'s hobbies, comma separated"
+    # hobbies = gets.chomp.split(", ")
+    # # ask for height
+    # puts "#{name}'s height in cm"
+    # height = gets.chomp.to_i
+    # # ask for country of birth
+    # puts "#{name}'s country of birth"
+    # birth_country = gets.chomp
+
     # push data as hash to the student array
     students << { 
       name: name,
       cohort: cohort,
-      hobbies: hobbies,
-      height: height,
-      birth_country: birth_country
+      # hobbies: hobbies,
+      # height: height,
+      # birth_country: birth_country
     }
-    puts "Now we have #{students.length} students"
+    puts "Now we have #{students.length} #{students.length == 1 ? 'student' : 'students'}"
     # get next name, if user enters empty string, loop breaks.
     name = gets.chomp
   end
