@@ -57,48 +57,24 @@ def add_student(name, cohort)
   @students << { name: name, cohort: cohort.to_sym }
 end
 
-def print_menu
-  puts '1. Input the students'
-  puts '2. Show the students'
-  puts '3. Save student data to csv'
-  puts '4. Load student data from csv'
-  puts '9. Exit'
-end
-
 def show_students
   print_header
   print_student_list
   print_footer
 end
 
-def process(selection)
-  case selection
-  when '1'
-    input_students
-  when '2'
-    show_students
-  when '3'
-    save_students
-  when '4'
-    load_students
-  when '9'
-    exit # terminates program
-  else
-    puts "I don't know what you meant, try again"
-  end
-end
-
 def save_students
-  # open file to write to
-  file = File.open("students.csv", "w")
+  puts 'Which file to save to?'
+  target = STDIN.gets.chomp
+  file = File.open(target, 'w')
   # iterate through students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
+    csv_line = student_data.join(',')
     file.puts csv_line
   end
   file.close
-  puts "Students saved to students.csv"
+  puts "Students saved to #{target}"
 end
 
 def load_students(filename = 'students.csv')
@@ -109,7 +85,6 @@ def load_students(filename = 'students.csv')
   end
   file.close
   puts "Students loaded from #{filename}"
-
 end
 
 def try_load_students
@@ -125,10 +100,49 @@ def try_load_students
   end
 end
 
+def clear_students
+  puts 'Are you sure you want to clear student data? Unsaved data will be lost. (Y/n)'
+  input = STDIN.gets.chomp
+  if input == 'Y'
+    @students = []
+    puts 'Student data cleared'
+  else
+    puts 'Student data not cleared'
+  end
+end
+
 def interactive_menu
   loop do
     print_menu
     process(STDIN.gets.chomp)
+  end
+end
+
+def print_menu
+  puts '1. Input the students'
+  puts '2. Show the students'
+  puts '3. Save student data to csv'
+  puts '4. Load student data from csv'
+  puts '5. Clear student data'
+  puts '9. Exit'
+end
+
+def process(selection)
+  case selection
+  when '1'
+    input_students
+  when '2'
+    show_students
+  when '3'
+    save_students
+  when '4'
+    load_students
+  when '5'
+    clear_students
+  when '9'
+    exit # terminates program
+  else
+    puts "I don't know what you meant, try again"
   end
 end
 
