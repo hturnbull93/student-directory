@@ -23,50 +23,28 @@ def input_students
   puts 'Please enter the names of the students'
   puts 'To finish, just hit return twice'
   # get a name
-  name = gets.chomp
+  name = STDIN.gets.chomp
   while !name.empty? do
     # ask for cohort
     puts "#{name}'s cohort, default is January"
     cohort = ''
+    months = %w[january february march april may june july august september october november december]
     while cohort == '' do
-      input = gets.chomp.downcase
-      case input
-      when ''
+      input = STDIN.gets.chomp.downcase
+      if months.include?(input)
+        cohort = input.to_sym
+      elsif input == ''
         cohort = :january
-      when 'january'
-        cohort = :january
-      when 'february'
-        cohort = :february
-      when 'march'
-        cohort = :march
-      when 'april'
-        cohort = :april
-      when 'may'
-        cohort = :may
-      when 'june'
-        cohort = :june
-      when 'july'
-        cohort = :july
-      when 'august'
-        cohort = :august
-      when 'septepmer'
-        cohort = :september
-      when 'october'
-        cohort = :october
-      when 'november'
-        cohort = :november
-      when 'december'
-        cohort = :december
       else
         puts 'Month has typo, try again'
       end
     end
 
     # push data as hash to the student array
-    @students << { name: name, cohort: cohort, }
+    @students << { name: name, cohort: cohort }
     puts "Now we have #{@students.length} #{@students.length == 1 ? 'student' : 'students'}"
     # get next name, if user enters empty string, s.
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
 end
 
@@ -136,11 +114,10 @@ end
 
 def interactive_menu
   loop do
-    # 1. Print menu
     print_menu
-    # get input and action
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
+try_load_students
 interactive_menu
