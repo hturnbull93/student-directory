@@ -67,7 +67,10 @@ def show_students
   end
 end
 
-def save_students(target = 'students.csv')
+def save_students
+  puts 'File to save to? Default: students.csv'
+  target = STDIN.gets.chomp
+  target = 'students.csv' if target == ''
   file = File.open(target, 'w')
   # iterate through students
   @students.each do |student|
@@ -137,8 +140,7 @@ def process(selection)
   when '2'
     show_students
   when '3'
-    puts 'File to save to? Default: students.csv'
-    save_students(STDIN.gets.chomp)
+    save_students
   when '4'
     puts 'File to load from? Default: students.csv'
     load_students(STDIN.gets.chomp)
