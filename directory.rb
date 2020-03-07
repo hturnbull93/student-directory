@@ -81,6 +81,7 @@ def save_students
     end
   else
     write_students(target)
+  end
 end
 
 def write_students(target)
