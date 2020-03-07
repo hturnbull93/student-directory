@@ -85,12 +85,10 @@ end
 def load_students(filename = 'students.csv')
   filename = 'students.csv' if filename == ''
   if File.exist?(filename)
-    file = File.open(filename, 'r')
-    file.readlines.each do |line|
+    File.foreach(filename,) { |line|
       name, cohort = line.chomp.split(',')
       add_student(name, cohort)
-    end
-    file.close
+    }
     puts "Loaded #{@students.length} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
