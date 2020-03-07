@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 
 # print out a header for the list
@@ -85,12 +86,11 @@ def save_students
 end
 
 def write_students(target)
-  File.open(target, 'w') do |file|
+  CSV.open(target, 'w') do |file|
     # iterate through students
     @students.each do |student|
       student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(',')
-      file.write "#{csv_line}\n"
+      file << student_data
     end
   end
   puts "Students saved to #{target}"
@@ -99,8 +99,8 @@ end
 def load_students(filename = 'students.csv')
   filename = 'students.csv' if filename == ''
   if File.exist?(filename)
-    File.foreach(filename) do |line|
-      name, cohort = line.chomp.split(',')
+    CSV.foreach(filename) do |row|
+      name, cohort = row
       add_student(name, cohort)
     end
     puts "Loaded #{@students.length} from #{filename}"
