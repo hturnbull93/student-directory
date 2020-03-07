@@ -47,7 +47,7 @@ def print_by_initial(students)
       count += 1
     end
   end
-  puts "There are #{count} students with the initial '#{initial}'"
+  puts "We have #{count} #{count == 1 ? 'student' : 'students'} with the initial '#{initial}'"
 end
 
 # print out students with name less than 12 characters
@@ -60,7 +60,7 @@ def print_under_12(students)
       count += 1
     end
   end
-  puts "There are #{count} students with names less than 12 characters"
+  puts "We have #{count} #{count == 1 ? 'student' : 'students'} with less than 12 letters in their name"
 end
 
 # print students by cohort
@@ -84,7 +84,7 @@ end
 
 # print out a footer with the number of students
 def print_footer(names)
-  puts "Overall, we have #{names.length} great students"
+  puts "Overall, we have #{names.length} great #{names.length == 1 ? 'student' : 'students'}"
 end
 
 # get student names from user
@@ -174,6 +174,6 @@ students = input_students
 print_header
 # print(students)
 # print_by_initial(students)
-# print_under_12(students)
-print_by_cohort(students)
+print_under_12(students)
+# print_by_cohort(students)
 print_footer(students)
