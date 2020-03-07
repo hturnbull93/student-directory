@@ -1,18 +1,3 @@
-# Array of students
-# students = [
-#   { name: 'Dr. Hannibal Lecter', cohort: :november },
-#   { name: 'Darth Vader', cohort: :november },
-#   { name: 'Nurse Ratched', cohort: :november },
-#   { name: 'Michael Corleone', cohort: :november },
-#   { name: 'Alex DeLarge', cohort: :november },
-#   { name: 'The Wicked Witch of the West', cohort: :november },
-#   { name: 'Terminator', cohort: :november },
-#   { name: 'Freddy Krueger', cohort: :november },
-#   { name: 'The Joker', cohort: :november },
-#   { name: 'Joffrey Baratheon', cohort: :november },
-#   { name: 'Norman Bates', cohort: :november }
-# ]
-
 # print out a header for the list
 def print_header
   puts 'The students of Villains Academy'
@@ -23,7 +8,7 @@ end
 def print(students)
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]}"
-    print_student_data(student)
+    # print_student_data(student)
   end
 end
 
@@ -98,38 +83,38 @@ def input_students
   while !name.empty? do
     # ask for cohort
     puts "#{name}'s cohort, default is January"
-    cohort = ""
-    while cohort == "" do
+    cohort = ''
+    while cohort == '' do
       input = gets.chomp.downcase
       case input
-      when ""
+      when ''
         cohort = :january
-      when "january"
+      when 'january'
         cohort = :january
-      when "february"
+      when 'february'
         cohort = :february
-      when "march"
+      when 'march'
         cohort = :march
-      when "april"
+      when 'april'
         cohort = :april
-      when "may"
+      when 'may'
         cohort = :may
-      when "june"
+      when 'june'
         cohort = :june
-      when "july"
+      when 'july'
         cohort = :july
-      when "august"
+      when 'august'
         cohort = :august
-      when "septepmer"
+      when 'septepmer'
         cohort = :september
-      when "october"
+      when 'october'
         cohort = :october
-      when "november"
+      when 'november'
         cohort = :november
-      when "december"
+      when 'december'
         cohort = :december
       else
-        puts "Month has typo, try again"
+        puts 'Month has typo, try again'
       end
     end
     # # ask for hobbies
@@ -158,28 +143,39 @@ def input_students
   students
 end
 
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print(@students)
+  print_footer(@students)
+end
+
+def process(selection)
+  case selection
+  when '1'
+    students = input_students
+  when '2'
+    show_students
+  when '9'
+    exit # terminates program
+  else
+    puts "I don't know what you meant, try again"
+  end
+end
+
+@students = []
+
 def interactive_menu
-  students = []
   loop do
     # 1. Print menu
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    # 2. read input and save to var
-    selection = gets.chomp
-    # 3. do what user asked
-    case selection
-    when '1'
-      students = input_students
-    when '2'
-      print_header
-      print(students)
-      print_footer(students)
-    when '9'
-      exit # terminates program
-    else
-      puts "I don't know what you meant, try again"
-    end
+    print_menu
+    # get input and action
+    process(gets.chomp)
   end
 end
 
