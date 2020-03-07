@@ -18,38 +18,43 @@ def print_footer
   puts "Overall, we have #{@students.length} great #{@students.length == 1 ? 'student' : 'students'}"
 end
 
-# get student names from user
-def input_students
-  puts 'Please enter the names of the students'
-  puts 'To finish, just hit return twice'
-  # get a name
+# enter student name and info
+def enter_student_info
   name = STDIN.gets.chomp
   while !name.empty? do
-    # ask for cohort
-    puts "#{name}'s cohort, default is January"
-    cohort = ''
-    months = %w[january february march april may june july august september october november december]
-    while cohort == '' do
-      input = STDIN.gets.chomp.downcase
-      if months.include?(input)
-        cohort = input
-      elsif input == ''
-        cohort = :january
-      else
-        puts 'Month has typo, try again'
-      end
-    end
-
-    # push data as hash to the student array
-    add_student
+    cohort = enter_student_cohort
+    add_student(name, cohort)
     puts "Now we have #{@students.length} #{@students.length == 1 ? 'student' : 'students'}"
-    # get next name, if user enters empty string, s.
     name = STDIN.gets.chomp
   end
 end
 
-def add_student
-  @students << {name: name, cohort: cohort.to_sym}
+# ask for cohort of student
+def enter_student_cohort
+  puts "Enter cohort, default is January"
+  cohort = ''
+  months = %w[january february march april may june july august september october november december]
+  while cohort == '' do
+    input = STDIN.gets.chomp.downcase
+    if months.include?(input)
+      return input
+    elsif input == ''
+      return 'january'
+    else
+      puts 'Month has typo, try again'
+    end
+  end
+end
+
+# get student names from user
+def input_students
+  puts 'Please enter the names of the students'
+  puts 'To finish, just hit return twice'
+  enter_student_info
+end
+
+def add_student(name, cohort)
+  @students << { name: name, cohort: cohort.to_sym }
 end
 
 def print_menu
@@ -99,20 +104,21 @@ def load_students(filename = 'students.csv')
   file = File.open(filename, 'r')
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    add_student
+    add_student(name, cohort)
   end
   file.close
 end
 
 def try_load_students
   filename = ARGV.first
-  return if filename.nil?
+  if filename.nil?
+    filename = 'students.csv'
+  end
   if File.exist?(filename)
     load_students(filename)
     puts "Loaded #{@students.length} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
-    exit
   end
 end
 
