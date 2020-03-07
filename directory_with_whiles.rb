@@ -19,29 +19,40 @@ def print_header
   puts '-------------'
 end
 
+# print out a footer with the number of students
+def print_footer(names)
+  puts "Overall, we have #{names.length} great students"
+end
+
+##### WHILE LOOPS INSTEAD OF EACH METHODS
+
 # print out the students list
-def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-  end
+def print_while(students)
+  i = 0
+  while i < students.length {
+    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    i += 1
+  }
 end
 
 # print out students with a certain initial given by user
-def print_by_initial(students)
+def print_by_initial_while(students)
   puts 'Which initial would you like list of?'
   initial = gets.chomp
+  i = 0
   count = 0
-  students.each_with_index do |student, index|
-    if student[:name][0].downcase == initial.downcase
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  while i < students.length do
+    if students[i][:name][0].downcase == initial.downcase
+      puts "#{index + 1}. #{student[i][:name]} (#{student[i][:cohort]} cohort)"
       count += 1
     end
+    i += 1
   end
   puts "There are #{count} students with the initial '#{initial}'"
 end
 
 # print out students with name less than 12 characters
-def print_under_12(students)
+def print_under_12_while(students)
   count = 0
   students.each_with_index do |student, index|
     if student[:name].length < 12
@@ -50,11 +61,6 @@ def print_under_12(students)
     end
   end
   puts "There are #{count} students with names less than 12 characters"
-end
-
-# print out a footer with the number of students
-def print_footer(names)
-  puts "Overall, we have #{names.length} great students"
 end
 
 # get student names from user
