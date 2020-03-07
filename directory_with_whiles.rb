@@ -38,12 +38,14 @@ end
 
 # print out students with name less than 12 characters
 def print_under_12_while(students)
+  i = 0
   count = 0
-  students.each_with_index do |student, index|
-    if student[:name].length < 12
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  while i < students.length do
+    if students[i][:name].length < 12
+      puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
       count += 1
     end
+    i += 1
   end
   puts "There are #{count} students with names less than 12 characters"
 end
@@ -70,5 +72,6 @@ end
 students = input_students
 print_header
 # print_while(students)
-print_by_initial_while(students)
+# print_by_initial_while(students)
+print_under_12_while(students)
 print_footer(students)
