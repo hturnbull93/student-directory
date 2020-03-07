@@ -21,7 +21,7 @@ end
 # enter student name and info
 def enter_student_info
   name = STDIN.gets.chomp
-  while !name.empty? do
+  until name.empty? do
     cohort = enter_student_cohort
     add_student(name, cohort)
     puts "Now we have #{@students.length} #{@students.length == 1 ? 'student' : 'students'}"
@@ -58,12 +58,12 @@ def add_student(name, cohort)
 end
 
 def show_students
-  if @students.length > 0
+  if @students.empty?
+    puts 'We have no students'
+  else
     print_header
     print_student_list
     print_footer
-  else
-    puts 'We have no students'
   end
 end
 
@@ -84,23 +84,23 @@ def save_students
 end
 
 def write_students(target)
-  File.open(target, 'w') { |file|
+  File.open(target, 'w') do |file|
     # iterate through students
     @students.each do |student|
       student_data = [student[:name], student[:cohort]]
       csv_line = student_data.join(',')
       file.write "#{csv_line}\n"
     end
-  }
+  end
 end
 
 def load_students(filename = 'students.csv')
   filename = 'students.csv' if filename == ''
   if File.exist?(filename)
-    File.foreach(filename) { |line|
+    File.foreach(filename) do |line|
       name, cohort = line.chomp.split(',')
       add_student(name, cohort)
-    }
+    end
     puts "Loaded #{@students.length} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
@@ -110,10 +110,10 @@ end
 def try_load_students
   filename = ARGV.first
   if filename.nil?
-    puts "Attempting to load default file: students.csv"
+    puts 'Attempting to load default file: students.csv'
     filename = 'students.csv'
   end
-    load_students(filename)
+  load_students(filename)
 end
 
 def clear_students
