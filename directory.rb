@@ -58,9 +58,13 @@ def add_student(name, cohort)
 end
 
 def show_students
-  print_header
-  print_student_list
-  print_footer
+  if @students.length > 0
+    print_header
+    print_student_list
+    print_footer
+  else
+    puts 'We have no students'
+  end
 end
 
 def save_students
