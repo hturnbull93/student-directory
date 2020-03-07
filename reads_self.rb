@@ -1,1 +1,1 @@
-puts File.read(__FILE__)
+puts File.read($0)
