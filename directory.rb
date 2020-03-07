@@ -171,6 +171,33 @@ def input_students
   students
 end
 
+def interactive_menu
+  students = []
+  loop do
+    # 1. Print menu
+    puts "1. Input the students" 
+    puts "2. Show the students"
+    puts "9. Exit"
+    # 2. read input and save to var
+    selection = gets.chomp
+    # 3. do what user asked
+    case selection
+    when '1'
+      students = input_students
+    when '2'
+      print_header
+      print(students)
+      print_footer(students)
+    when '9'
+      exit # terminates program
+    else
+      puts "I don't know what you meant, try again"
+    end
+  end
+end
+
+
+=begin 
 students = input_students
 if students.length > 0
   print_header
@@ -182,3 +209,4 @@ if students.length > 0
 else
   puts "No students at Villains Academy"
 end
+ =end
