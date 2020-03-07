@@ -5,8 +5,8 @@ def print_header
 end
 
 # print out the students list
-def print(students)
-  students.each_with_index do |student, index|
+def print_student_list
+  @students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]}"
     # print_student_data(student)
   end
@@ -21,11 +21,11 @@ def print_student_data(student)
 end
 
 # print out students with a certain initial given by user
-def print_by_initial(students)
+def print_by_initial
   puts 'Which initial would you like list of?'
   initial = gets.chomp
   count = 0
-  students.each_with_index do |student, index|
+  @students.each_with_index do |student, index|
     if student[:name][0].downcase == initial.downcase
       puts "#{index + 1}. #{student[:name]}"
       print_student_data(student)
@@ -36,9 +36,9 @@ def print_by_initial(students)
 end
 
 # print out students with name less than 12 characters
-def print_under_12(students)
+def print_under_12
   count = 0
-  students.each_with_index do |student, index|
+  @students.each_with_index do |student, index|
     if student[:name].length < 12
       puts "#{index + 1}. #{student[:name]}"
       print_student_data(student)
@@ -49,9 +49,9 @@ def print_under_12(students)
 end
 
 # print students by cohort
-def print_by_cohort(students)
+def print_by_cohort
   cohorts = []
-  students.each do |student|
+  @students.each do |student|
     unless cohorts.include? student[:cohort]
       cohorts << student[:cohort]
     end
@@ -68,16 +68,14 @@ def print_by_cohort(students)
 end
 
 # print out a footer with the number of students
-def print_footer(names)
-  puts "Overall, we have #{names.length} great #{names.length == 1 ? 'student' : 'students'}"
+def print_footer
+  puts "Overall, we have #{@students.length} great #{@students.length == 1 ? 'student' : 'students'}"
 end
 
 # get student names from user
 def input_students
   puts 'Please enter the names of the students'
   puts 'To finish, just hit return twice'
-  # array for students to be pushed into
-  students = []
   # get a name
   name = gets.chomp
   while !name.empty? do
@@ -128,19 +126,18 @@ def input_students
     # birth_country = gets.chomp
 
     # push data as hash to the student array
-    students << { 
+    @students << { 
       name: name,
       cohort: cohort,
       # hobbies: hobbies,
       # height: height,
       # birth_country: birth_country
     }
-    puts "Now we have #{students.length} #{students.length == 1 ? 'student' : 'students'}"
+    puts "Now we have #{@students.length} #{@students.length == 1 ? 'student' : 'students'}"
     # get next name, if user enters empty string, s.
     name = gets.chomp
   end
   # return students array implicitly
-  students
 end
 
 def print_menu
@@ -151,14 +148,14 @@ end
 
 def show_students
   print_header
-  print(@students)
-  print_footer(@students)
+  print_student_list
+  print_footer
 end
 
 def process(selection)
   case selection
   when '1'
-    students = input_students
+    input_students
   when '2'
     show_students
   when '9'
