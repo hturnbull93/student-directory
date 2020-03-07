@@ -31,7 +31,7 @@ end
 
 # ask for cohort of student
 def enter_student_cohort
-  puts "Enter cohort, default is January"
+  puts 'Enter cohort, default is January'
   cohort = ''
   months = %w[january february march april may june july august september october november december]
   while cohort == '' do
@@ -98,6 +98,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "Students saved to students.csv"
 end
 
 def load_students(filename = 'students.csv')
@@ -107,6 +108,8 @@ def load_students(filename = 'students.csv')
     add_student(name, cohort)
   end
   file.close
+  puts "Students loaded from #{filename}"
+
 end
 
 def try_load_students
