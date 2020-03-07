@@ -99,7 +99,7 @@ def input_students
     # ask for cohort
     puts "#{name}'s cohort, default is January"
     cohort = ""
-    while cohort = "" do
+    while cohort == "" do
       input = gets.chomp.downcase
       case input
       when ""
@@ -152,7 +152,7 @@ def input_students
     }
     puts "Now we have #{students.length} #{students.length == 1 ? 'student' : 'students'}"
     # get next name, if user enters empty string, s.
-    name = gets.gsub(/\n/, "")
+    name = gets.chomp
   end
   # return students array implicitly
   students
@@ -162,7 +162,7 @@ def interactive_menu
   students = []
   loop do
     # 1. Print menu
-    puts "1. Input the students" 
+    puts "1. Input the students"
     puts "2. Show the students"
     puts "9. Exit"
     # 2. read input and save to var
@@ -183,18 +183,4 @@ def interactive_menu
   end
 end
 
-
-
-=begin 
-students = input_students
-if students.length > 0
-  print_header
-  # print(students)
-  # print_by_initial(students)
-  print_under_12(students)
-  # print_by_cohort(students)
-  print_footer(students)
-else
-  puts "No students at Villains Academy"
-end
- =end
+interactive_menu
