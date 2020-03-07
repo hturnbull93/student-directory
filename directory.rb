@@ -83,13 +83,17 @@ def save_students
 end
 
 def load_students(filename = 'students.csv')
-  file = File.open(filename, 'r')
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    add_student(name, cohort)
+  if File.exist?(filename)
+    file = File.open(filename, 'r')
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+      add_student(name, cohort)
+    end
+    file.close
+    puts "Loaded #{@students.length} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist"
   end
-  file.close
-  puts "Students loaded from #{filename}"
 end
 
 def try_load_students
@@ -98,12 +102,7 @@ def try_load_students
     puts "Attempting to load default file: students.csv"
     filename = 'students.csv'
   end
-  if File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{@students.length} from #{filename}"
-  else
-    puts "Sorry, #{filename} doesn't exist"
-  end
 end
 
 def clear_students
