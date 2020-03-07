@@ -40,6 +40,18 @@ def print_by_initial(students)
   puts "There are #{count} students with the initial '#{initial}'"
 end
 
+# print out students with a certain initial given by user
+def print_under_12(students)
+  count = 0
+  students.each_with_index do |student, index|
+    if student[:name].length < 12
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      count += 1
+    end
+  end
+  puts "There are #{count} students with names less than 12 characters"
+end
+
 # print out a footer with the number of students
 def print_footer(names)
   puts "Overall, we have #{names.length} great students"
@@ -68,4 +80,5 @@ students = input_students
 print_header
 print(students)
 print_by_initial(students)
+print_under_12(students)
 print_footer(students)
