@@ -64,7 +64,23 @@ def print_under_12(students)
 end
 
 # print students by cohort
-def print_by_cohort
+def print_by_cohort(students)
+  cohorts = []
+  students.each do |student|
+    unless cohorts.include? student[:cohort]
+      cohorts << student[:cohort]
+    end
+  end
+  cohorts.each do |month|
+    puts "#{month} cohort:"
+    students.each_with_index do |student, index|
+      if student[:cohort] == month
+        puts "#{index + 1}. #{student[:name]}"
+        # print_student_data(student)
+      end
+    end
+  end
+end
 
 # print out a footer with the number of students
 def print_footer(names)
@@ -147,7 +163,7 @@ def input_students
       birth_country: birth_country
     }
     puts "Now we have #{students.length} students"
-    # get another name, if user presses enter with no input name is empty, so loop breaks.
+    # get next name, if user enters empty string, loop breaks.
     name = gets.chomp
   end
   # return students array implicitly
@@ -156,7 +172,8 @@ end
 
 students = input_students
 print_header
-print(students)
+# print(students)
 # print_by_initial(students)
 # print_under_12(students)
+print_by_cohort(students)
 print_footer(students)
