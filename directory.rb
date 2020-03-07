@@ -165,7 +165,7 @@ def input_students
     }
     puts "Now we have #{students.length} #{students.length == 1 ? 'student' : 'students'}"
     # get next name, if user enters empty string, loop breaks.
-    name = gets.chomp
+    name = gets.gsub(/\n/, "")
   end
   # return students array implicitly
   students
