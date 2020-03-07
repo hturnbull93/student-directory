@@ -71,21 +71,33 @@ def save_students
   puts 'File to save to? Default: students.csv'
   target = STDIN.gets.chomp
   target = 'students.csv' if target == ''
-  file = File.open(target, 'w')
-  # iterate through students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(',')
-    file.puts csv_line
+  if File.exist?(target)
+    puts "#{target} already exists. Overwrite? (Y/n)"
+    input = STDIN.gets.chomp
+    if input == 'Y'
+      write_students(target)
+      puts "Students saved to #{target}"
+    else
+      puts 'Save aborted'
+    end
   end
-  file.close
-  puts "Students saved to #{target}"
+end
+
+def write_students(target)
+  File.open(target, 'w') { |file|
+    # iterate through students
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(',')
+      file.write "#{csv_line}\n"
+    end
+  }
 end
 
 def load_students(filename = 'students.csv')
   filename = 'students.csv' if filename == ''
   if File.exist?(filename)
-    File.foreach(filename,) { |line|
+    File.foreach(filename) { |line|
       name, cohort = line.chomp.split(',')
       add_student(name, cohort)
     }
